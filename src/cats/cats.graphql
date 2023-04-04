@@ -1,0 +1,40 @@
+type Query {
+  cats: [Cat]
+  cat(id: ID!): Cat
+}
+
+type Mutation {
+  createCat(createCatInput: CreateCatInput): Cat
+  
+  @deprecated(reason: "oldCreateCate is deprecated. Use createCat instead.")
+  oldCreateCat(createCatInput: CreateCatInput): Cat
+}
+
+type Subscription {
+  catCreated: Cat
+}
+
+type Owner {
+  id: Int!
+  name: String!
+  age: Int
+  cats: [Cat!]
+}
+
+type Cat {
+  id: Int
+  name: String
+  age: Int
+  owner: Owner
+}
+"""
+Test comment
+"""
+input CreateCatInput {
+  name: String
+
+  @deprecated(reason: "oldField is deprecated. Use newField instead.")
+  oldName:String
+
+  age: Int
+}
